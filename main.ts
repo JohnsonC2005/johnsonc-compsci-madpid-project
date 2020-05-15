@@ -1,9 +1,33 @@
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
-    Hamburger.setPosition(Math.randomRange(0, 120), Math.randomRange(0, 100))
+    Pizza.setPosition(Math.randomRange(0, 160), Math.randomRange(0, 100))
     info.changeScoreBy(1)
+    music.pewPew.play()
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    Hamburger = sprites.create(img`
+    game.reset()
+})
+let Pizza: Sprite = null
+effects.confetti.startScreenEffect()
+let mySprite = sprites.create(img`
+. . . . . . f f f f . . . . . . 
+. . . . f f f 2 2 f f f . . . . 
+. . . f f f 2 2 2 2 f f f . . . 
+. . f f f e e e e e e f f f . . 
+. . f f e 2 2 2 2 2 2 e e f . . 
+. . f e 2 f f f f f f 2 e f . . 
+. . f f f f e e e e f f f f . . 
+. f f e f b f 4 4 f b f e f f . 
+. f e e 4 1 f d d f 1 4 e e f . 
+. . f e e d d d d d d e e f . . 
+. . . f e e 4 4 4 4 e e f . . . 
+. . e 4 f 2 2 2 2 2 2 f 4 e . . 
+. . 4 d f 2 2 2 2 2 2 f d 4 . . 
+. . 4 4 f 4 4 5 5 4 4 f 4 4 . . 
+. . . . . f f f f f f . . . . . 
+. . . . . f f . . f f . . . . . 
+`, SpriteKind.Player)
+controller.moveSprite(mySprite)
+Pizza = sprites.create(img`
 . . . . . . . . . . . . . b e e b b b b . . . . . . . . . . . . 
 . . . . . . . . . . . . e e b b b b 4 b b . . . . . . . . . . . 
 . . . . . . . . . . . . e b 3 4 4 b b 4 b b . . . . . . . . . . 
@@ -37,31 +61,7 @@ b 5 5 5 1 1 5 d d d d 5 5 d 5 4 4 e e d e . . . . . . . . . . .
 4 1 5 5 4 e e d e . . . . . . . . . . . . . . . . . . . . . . . 
 4 4 e e . . . 4 e . . . . . . . . . . . . . . . . . . . . . . . 
 `, SpriteKind.Food)
-    Hamburger.setPosition(Math.randomRange(0, 150), Math.randomRange(0, 100))
-    mySprite.startEffect(effects.fire)
-    info.startCountdown(60)
-    info.setScore(0)
-})
-let Hamburger: Sprite = null
-let mySprite: Sprite = null
-effects.confetti.startScreenEffect()
-mySprite = sprites.create(img`
-. . . . . . f f f f . . . . . . 
-. . . . f f f 2 2 f f f . . . . 
-. . . f f f 2 2 2 2 f f f . . . 
-. . f f f e e e e e e f f f . . 
-. . f f e 2 2 2 2 2 2 e e f . . 
-. . f e 2 f f f f f f 2 e f . . 
-. . f f f f e e e e f f f f . . 
-. f f e f b f 4 4 f b f e f f . 
-. f e e 4 1 f d d f 1 4 e e f . 
-. . f e e d d d d d d e e f . . 
-. . . f e e 4 4 4 4 e e f . . . 
-. . e 4 f 2 2 2 2 2 2 f 4 e . . 
-. . 4 d f 2 2 2 2 2 2 f d 4 . . 
-. . 4 4 f 4 4 5 5 4 4 f 4 4 . . 
-. . . . . f f f f f f . . . . . 
-. . . . . f f . . f f . . . . . 
-`, SpriteKind.Player)
-mySprite.vy = 5
-controller.moveSprite(mySprite)
+Pizza.setPosition(scene.screenWidth(), scene.screenHeight())
+mySprite.startEffect(effects.fire)
+info.startCountdown(60)
+info.setScore(0)
